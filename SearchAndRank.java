@@ -116,12 +116,12 @@ public class SearchAndRank {
 		      results.add(hitDoc);
 		      // explain the calculation of scores
 		      //System.out.print(isearcher.explain(booleanQuery.build(), hits[i].doc));
-		}
+	    }
 	    
 	    ireader.close();
 	    directory.close();
 		
-		return results;
+	    return results;
 	}
 	
 	public void printQuery(List<String> queryWords, int taskNum) {
