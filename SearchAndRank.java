@@ -54,7 +54,7 @@ public class SearchAndRank {
 		// Implementation of Similarity with the Vector Space Model, TF-IDF and Cosine similarity
 		ClassicSimilarity VSM = new ClassicSimilarity();
 		config.setSimilarity(VSM);
-	    IndexWriter iwriter = new IndexWriter(directory, config);   
+	        IndexWriter iwriter = new IndexWriter(directory, config);   
 		for(int i=0;i<docs.size();i++){
 			// Extract data from each document
 			DocumentInCollection temp = docs.get(i);
@@ -67,17 +67,17 @@ public class SearchAndRank {
 			Document doc = new Document();
 			// StrFields cannot have any analysis or filters applied, and will only give results for exact matches
 			// TextFields usually have a tokenizer and text analysis attached
-		    doc.add(new Field("title", title, TextField.TYPE_STORED));
-		    doc.add(new Field("abstractText", abstractText, TextField.TYPE_STORED));
-		    doc.add(new Field("query", query, TextField.TYPE_STORED));
-		    // Focus on items that are marked with search task number
-		    doc.add(new Field("taskNum", taskNum, TextField.TYPE_STORED));
-		    // relevance is just saved
-		    doc.add(new StoredField("relevance", relevance, TextField.TYPE_STORED));
-		    iwriter.addDocument(doc);
+		        doc.add(new Field("title", title, TextField.TYPE_STORED));
+		        doc.add(new Field("abstractText", abstractText, TextField.TYPE_STORED));
+		    	doc.add(new Field("query", query, TextField.TYPE_STORED));
+		    	// Focus on items that are marked with search task number
+		    	doc.add(new Field("taskNum", taskNum, TextField.TYPE_STORED));
+		    	// relevance is just saved
+		    	doc.add(new StoredField("relevance", relevance, TextField.TYPE_STORED));
+		    	iwriter.addDocument(doc);
 		}
-	    iwriter.close();
-	    directory.close();
+	    	iwriter.close();
+	    	directory.close();
 	}
 	
 	public List<Document> search(List<String> queryWords, int taskNum) throws IOException, ParseException {
@@ -89,19 +89,19 @@ public class SearchAndRank {
 		// implement the Lucene search here
 		Path save_path=Paths.get("/Users/shichangtai/Desktop/Information_Retrieval/assignment2/index");
 		Directory directory = FSDirectory.open(save_path);
-	    DirectoryReader ireader = DirectoryReader.open(directory);
-	    IndexSearcher isearcher = new IndexSearcher(ireader);
-	    // use the same similarity with index process
-	    ClassicSimilarity VSM = new ClassicSimilarity();
-	    isearcher.setSimilarity(VSM);
+	    	DirectoryReader ireader = DirectoryReader.open(directory);
+	    	IndexSearcher isearcher = new IndexSearcher(ireader);
+	   	// use the same similarity with index process
+	    	ClassicSimilarity VSM = new ClassicSimilarity();
+	   	isearcher.setSimilarity(VSM);
 	    
 		// use the same analyzer with index process
 		Analyzer analyzer = new EnglishAnalyzer();    
-	    BooleanQuery.Builder booleanQuery = new BooleanQuery.Builder();
-	    QueryParser titleParser = new QueryParser("title", analyzer);
-	    QueryParser textParser = new QueryParser("abstractText", analyzer);
-	    QueryParser numParser = new QueryParser("taskNum", analyzer);
-	    if (queryWords!=null && taskNum!=0){    	
+	    	BooleanQuery.Builder booleanQuery = new BooleanQuery.Builder();
+	    	QueryParser titleParser = new QueryParser("title", analyzer);
+	    	QueryParser textParser = new QueryParser("abstractText", analyzer);
+	    	QueryParser numParser = new QueryParser("taskNum", analyzer);
+	    	if (queryWords!=null && taskNum!=0){    	
 	    	for(String query_item:queryWords){
 	    		booleanQuery.add(titleParser.parse(query_item), BooleanClause.Occur.SHOULD);
 	    		booleanQuery.add(textParser.parse(query_item), BooleanClause.Occur.SHOULD);
