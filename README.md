@@ -1,5 +1,6 @@
 # Information-Retrieval
 *Index, Search and Rank*
+
 Project is implemented with Lucene: [https://lucene.apache.org/core/6_6_0/index.html]
 
 Data: A series of documents with title, text, topic number and relevance
