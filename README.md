@@ -1,9 +1,10 @@
 # Information-Retrieval
-Index, search and rank
+*Index, Search and Rank*
+Project is implemented with Lucene: [https://lucene.apache.org/core/6_6_0/index.html]
 
 Data: A series of documents with title, text, topic number and relevance
 
-Task: Building a search engine with Lucene
+Task: Building a search engine
 
 Evaluation: averaged 11-step precision recall curves 
 
